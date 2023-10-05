@@ -6,9 +6,11 @@ import {
   ScrollView,
   TextInput,
   Dimensions,
+  TouchableOpacity
 } from "react-native";
 import React from "react";
 import { Feather } from "@expo/vector-icons";
+import Data from "../components/SearchData";
 
 export default function Search() {
   return (
@@ -42,7 +44,16 @@ export default function Search() {
           >
             Browse All
           </Text>
-          
+          <View style={styles.musicCardContainer}>
+          {Data?.map((data, index) => (
+              <TouchableOpacity
+                style={[styles.musicCard, { marginRight: "5%", backgroundColor: data.color }]}
+                key={index}
+              >
+                <Text style={styles.cardText}>{data.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -80,5 +91,28 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     color: "#000",
+  },
+  musicCard: {
+    flexDirection: "row",
+    // backgroundColor: "#282828",
+    alignItems: "center",
+    borderRadius: 7,
+    width: Dimensions.get("screen").width * 0.4,
+    height:100,
+    marginBottom: "5%",
+  },
+  musicCardContainer: {
+    marginTop: "5%",
+    flexDirection: "row",
+    alignItems: "center",
+    flexWrap: "wrap",
+  },
+  cardText: {
+    color: "#fff",
+    // marginLeft: "3.8%",
+    flex: 1,
+    flexWrap: "wrap",
+    fontSize:30,
+    textAlign:'center'
   },
 });
